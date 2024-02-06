@@ -4,7 +4,9 @@ const server = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const connectToDatabase = require("./database/connectdatabase.js");
-const getdata  = require('./routes/getsqldata.js')
+const getdata  = require('./routes/getsqldata.js');
+const getdatalogin = require("./routes/getdatalogin.js");
+
 
 // Use CORS middleware
 server.use(cors());
@@ -19,6 +21,9 @@ server.get("/", (req, res) => {
 
 //get data to the database
 server.use(getdata)
+
+//get a data specific users
+server.use(getdatalogin)
 
 connectToDatabase().then(() => {
   server.listen(port, () => {
